@@ -17,7 +17,6 @@ Node::Node(int id,int parentID=-1) {
     this->id = id;
     this->parentID = parentID;
 }
-int searchForAncestor(int id,int n);
 void processTree(vector<Node*> &tree, vector<vector<int>> &dynamicArrays,unordered_map<int,Node*> &hashTable, Node* root, int* counter,int depth);
 int main(int argc, char const *argv[])
 {
@@ -50,7 +49,7 @@ int main(int argc, char const *argv[])
     //cout << dynamicArrays.size() << endl;
     int counter = 0;
     processTree(tree,dynamicArrays,hashTable,tree[0],&counter,0);
-    cout << "hello " << endl;
+    //cout << "hello " << endl;
     int queries;
     infile >> queries;
     while(queries > 0){
@@ -78,25 +77,12 @@ int main(int argc, char const *argv[])
         ancestorID = hashTable[x]->id;
         outfile << ancestorID << endl;
     }
-//    for(auto v : dynamicArrays){
-//        for(auto n : v){
-//            if(hashTable[n]->id==15724){
-//                cout << "hereee " << endl;
-//            }
-//        }
-//    }
-    //cout << tree[15724]->label << endl;
+
     return 0;
 }
-int searchForAncestor(int id,int n){
 
-
-}
 void processTree(vector<Node*> &tree, vector<vector<int>> &dynamicArrays,unordered_map<int,Node*> &hashTable, Node* root, int* counter,int depth){
-    //hash table from label to id
-    //process itself
-    // while loop and process children recursively
-    //if() return;
+   
     (*counter)++;
     tree[root->id]->label = *counter;
     //tree[root].second = *counter;
@@ -112,19 +98,10 @@ void processTree(vector<Node*> &tree, vector<vector<int>> &dynamicArrays,unorder
 
     hashTable[*counter] = tree[root->id];
 
-    //int id = 0;
     for(auto node : tree[root->id]->children){
         processTree(tree,dynamicArrays,hashTable,node,counter,++depth);
         depth--;
         //id++;
     }
-//    for(auto node : tree){
-//        if(node.first == root){
-//            processTree(tree,dynamicArrays,hashTable,id,counter,++depth);
-//            //counter++;
-//            depth--;
-//        }
-//        id++;
-//    }
 
 }
